@@ -1,15 +1,12 @@
 import express from "express";
-const app = express();
 
-const port = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("🎉 Aplicação Node rodando no CPS1! Tudo OK!");
+    res.send("Hello CPS1!");
 });
 
-// linha OBRIGATÓRIA para que o CPS1 detecte healthcheck
-app.get("/healthz", (req, res) => res.send("ok"));
-
-app.listen(port, () => {
-  console.log(`🔥 Servidor rodando na porta ${port}`);
+app.listen(PORT, () => {
+    console.log(`Running on port ${PORT}`);
 });

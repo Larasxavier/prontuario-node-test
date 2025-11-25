@@ -1,12 +1,15 @@
-import http from "http";
+import express from "express";
+const app = express();
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello CPS1 — Node.js v24 is running!\n");
+app.get("/", (req, res) => {
+  res.send("🎉 Aplicação Node rodando no CPS1! Tudo OK!");
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// linha OBRIGATÓRIA para que o CPS1 detecte healthcheck
+app.get("/healthz", (req, res) => res.send("ok"));
+
+app.listen(port, () => {
+  console.log(`🔥 Servidor rodando na porta ${port}`);
 });

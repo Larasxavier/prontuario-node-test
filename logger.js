@@ -1,3 +1,4 @@
+// logger.js
 const fs = require("fs");
 const path = "./logs.txt";
 
@@ -9,7 +10,12 @@ function log(message, metadata = {}) {
   };
 
   const text = JSON.stringify(entry) + "\n";
-  fs.appendFileSync(path, text);
+
+  try {
+    fs.appendFileSync(path, text);
+  } catch (err) {
+    console.error("Erro ao gravar log:", err.message);
+  }
 
   console.log(text.trim());
 }

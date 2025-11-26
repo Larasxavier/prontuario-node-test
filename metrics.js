@@ -1,3 +1,4 @@
+// metrics.js
 const metrics = {
   requests_total: 0,
   errors_total: 0,
@@ -5,19 +6,22 @@ const metrics = {
   started_at: Date.now()
 };
 
-function recordRequest(durationMs) {
+function recordRequest(durationMs, isError = false) {
   metrics.requests_total++;
   metrics.latency_ms.push(durationMs);
-}
 
-function recordError() {
-  metrics.errors_total++;
+  if (isError) {
+    metrics.errors_total++;
+  }
 }
 
 function getMetrics() {
   const avgLatency =
     metrics.latency_ms.length > 0
-      ? (metrics.latency_ms.reduce((a, b) => a + b) / metrics.latency_ms.length).toFixed(2)
+      ? (
+          metrics.latency_ms.reduce((a, b) => a + b, 0) /
+          metrics.latency_ms.length
+        ).toFixed(2)
       : 0;
 
   return `
@@ -39,4 +43,4 @@ api_uptime_ms ${Date.now() - metrics.started_at}
 `;
 }
 
-module.exports = { recordRequest, recordError, getMetrics };
+module.exports = { recordRequest, getMetrics };

@@ -1,11 +1,13 @@
 {
-  "name": "hello-cps1",
+  "name": "health-api",
   "version": "1.0.0",
+  "description": "Mini API de saúde com logs, métricas e traces internos",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "4.19.2",
+    "uuid": "9.0.1"
   }
 }
